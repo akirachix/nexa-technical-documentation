@@ -7,7 +7,7 @@ use_directory_urls: true
 
 validation:
   nav:
-    omitted_files: warn
+    omitted_files: info
     not_found: warn
     absolute_links: warn
   links:
