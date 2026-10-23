@@ -100,17 +100,14 @@
 .md-typeset .zl-question p { margin: 0; }
 [data-md-color-scheme="slate"] .md-typeset .zl-question { background: #16344B; color: #DAF0F7; }
 
-/* Enforce the display framework container rule */
 .md-footer {
   display: block !important;
 }
 
-/* Hide the main inner horizontal shortcut menu layout */
 .md-footer__inner {
   display: none !important;
 }
 
-/* Complete light mode property styling targeting text classes directly */
 [data-md-color-scheme="default"] .md-footer-meta { 
   background: #F4FBFD !important; 
   border-top: 1px solid var(--zl-border) !important;
@@ -119,7 +116,6 @@
   color: #000000 !important;
 }
 
-/* Complete dark mode property styling targeting slate text classes directly */
 [data-md-color-scheme="slate"] .md-footer-meta { 
   background: #030E1C !important; 
   border-top: 1px solid var(--zl-border) !important;
