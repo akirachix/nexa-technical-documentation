@@ -54,7 +54,5 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 mkdocs serve --dev-addr 127.0.0.1:8002   # preview; choose any free port
 mkdocs build --strict                    # fails on warnings, broken links or missing pages
-./scripts/check_docs.sh                  # strict build plus image, placeholder and secret checks
-```
 
 The static site is written to `site/`. Publish the contents of that directory to any static host.
