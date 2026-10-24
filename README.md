@@ -1,68 +1,55 @@
 # ZamLine Technical Documentation
 
-Technical documentation for the ZamLine logistics platform, built with
-[MkDocs](https://www.mkdocs.org/) and
-[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
+The technical documentation for ZamLine, Team Nexa's freight coordination and decision-support platform for verified shippers and fleet companies in Zambia. It is a [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) site.
 
-## Status
+## Run locally
 
-This repository contains the initial documentation scaffold. Detailed
-technical content will be added and verified against the relevant source
-repositories and project references.
+Requires Python 3.10 or newer.
 
-## Documentation structure
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+mkdocs serve --dev-addr 127.0.0.1:8002
+```
 
-| Directory | Purpose |
-| --- | --- |
-| `docs/start-here/` | Documentation orientation and contribution guidance |
-| `docs/architecture/` | System architecture and context |
-| `docs/backend/` | Backend components and APIs |
-| `docs/ai/` | AI-related components and workflows |
-| `docs/frontend/` | Frontend applications and architecture |
-| `docs/platform/` | Infrastructure and deployment |
-| `docs/security/` | Security architecture and controls |
-| `docs/developer-guide/` | Development setup and workflows |
-| `docs/reference/` | Supporting technical references |
+Open <http://127.0.0.1:8002>. Use any free port.
 
-## Prerequisites
+## Build and check
 
-- Python 3.10 or later
-- pip
+```bash
+mkdocs build --strict      # writes the static site to site/
+./scripts/check_docs.sh    # strict build, image references, placeholder text, secret patterns
+```
 
-## Local development
+Publish the contents of `site/` to any static web host. `site/` is generated and is ignored by Git. Building does not deploy anything.
 
-Create and activate a virtual environment:
+## Structure
 
-    python3 -m venv .venv
-    source .venv/bin/activate
+| Path | Contents |
+|---|---|
+| `docs/index.md` | Home |
+| `docs/Get started/` | Problem, solution, users and workflow |
+| `docs/architecture/` | Components, responsibilities, data flow, external services |
+| `docs/backend/` | API design, data model, business verification, security, testing, deployment |
+| `docs/ai/` | Cost estimation, reference data, security, evaluation, operations |
+| `docs/frontend/` | The PWA: pages and workflows, security, testing, deployment |
+| `docs/platform/` | Configuration, perimeter, secrets, backups, deployment |
+| `docs/security/` | Security overview, privacy and retention |
+| `docs/developer-guide/` | Where to change things, standards, testing overview, release checklist |
+| `docs/reference/` | Glossary |
+| `docs/assets/images/` | Application screenshots, architecture diagrams, logo |
+| `docs/stylesheets/extra.css` | ZamLine brand styling |
+| `mkdocs.yml` | Navigation and theme configuration |
 
-Install dependencies:
+## Navigation
 
-    python -m pip install -r requirements.txt
+The primary navigation is the tab bar at the top of the site. The left sidebar lists the pages of the current section, and the right sidebar lists the headings of the current page. Pages in a section are added in `mkdocs.yml` under that section's tab.
 
-Run the local preview:
+## Brand
 
-    mkdocs serve
+Ice blue `#DAF0F7`, midnight navy `#030E1C`, cerulean `#00A9D6`. The header is light in light mode and navy in dark mode. The logo mark is `docs/assets/images/logo-mark.png`; the full logo is `logo.png`.
 
-Build the documentation:
+## Screenshots
 
-    mkdocs build --strict
-
-The generated site is written to `site/`, which is excluded from version control.
-
-## Contribution workflow
-
-1. Create a feature branch.
-2. Make a focused documentation change.
-3. Run `mkdocs build --strict`.
-4. Review changes with `git diff --check`.
-5. Commit and push the feature branch.
-6. Open a pull request for review.
-
-## Quality expectations
-
-- Keep navigation entries aligned with existing documentation pages.
-- Verify technical claims against authoritative project sources.
-- Never include credentials, access tokens, or other secrets.
-- Keep changes focused and reviewable.
-- Ensure the strict documentation build passes before opening a pull request.
+Use real screenshots of the application. Remove credentials, one-time codes and real personal or business information before adding them to `docs/assets/images/`, and reference every image from a page (`check_docs.sh` reports unreferenced images).

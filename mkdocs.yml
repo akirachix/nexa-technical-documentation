@@ -1,69 +1,116 @@
 site_name: ZamLine Technical Documentation
-site_description: Technical documentation for the ZamLine logistics platform
-site_url: ""
-repo_name: nexa-technical-documentation
-edit_uri: https://github.com/akirachix/nexa-technical-documentation/edit/main/docs/
+site_description: Technical documentation for ZamLine, a freight coordination and decision-support platform for verified shippers and fleet companies in Zambia.
+copyright: '<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; text-align: center;"><div style="display: flex; gap: 40px; justify-content: center;"><span>ZamLine · Team Nexa</span><span>Move freight with better information.</span></div></div>'
+docs_dir: docs
+site_dir: site
+use_directory_urls: true
+
+validation:
+  nav:
+    omitted_files: info
+    not_found: warn
+    absolute_links: warn
+  links:
+    not_found: warn
+    anchors: warn
+    absolute_links: warn
+    unrecognized_links: warn
 
 theme:
   name: material
   language: en
+  logo: assets/images/logo-mark.png
+  favicon: assets/images/favicon.png
+  font:
+    text: Instrument Sans
+    code: JetBrains Mono
   features:
     - navigation.tabs
-    - navigation.sections
-    - navigation.top
+    - navigation.tabs.sticky
     - navigation.indexes
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - toc.integrate
     - search.suggest
     - search.highlight
     - content.code.copy
   palette:
     - scheme: default
-      primary: indigo
-      accent: blue
       toggle:
-        icon: material/brightness-7
+        icon: material/weather-night
         name: Switch to dark mode
     - scheme: slate
-      primary: indigo
-      accent: blue
       toggle:
-        icon: material/brightness-4
+        icon: material/weather-sunny
         name: Switch to light mode
 
-plugins:
-  - search
-
-markdown_extensions:
-  - admonition
-  - attr_list
-  - tables
-  - toc:
-      permalink: true
-  - pymdownx.details
-  - pymdownx.superfences
+extra:
+  generator: false
 
 extra_css:
   - stylesheets/extra.css
 
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
 nav:
   - Home: index.md
-  - Start Here:
-      - Overview: start-here/index.md
-      - Documentation Guide: start-here/documentation-guide.md
+  - Get started:
+      - start-here/index.md
   - Architecture:
-      - Overview: architecture/index.md
-      - System Context: architecture/system-context.md
+      - architecture/index.md
+      - Components and responsibilities: architecture/components.md
+      - Data flow and external services: architecture/data-flow.md
   - Backend:
-      - Overview: backend/index.md
-  - AI:
-      - Overview: ai/index.md
+      - backend/index.md
+      - Data model: backend/data-model.md
+      - Business verification: backend/verification.md
+      - Security: backend/security.md
+      - Testing: backend/testing.md
+      - Deployment: backend/deployment.md
+  - AI Module:
+      - ai/index.md
+      - Reference data: ai/reference-data.md
+      - Security and privacy: ai/security.md
+      - Testing and evaluation: ai/testing.md
+      - Deployment and operations: ai/operations.md
   - Frontend:
-      - Overview: frontend/index.md
+      - frontend/index.md
+      - Pages and workflows: frontend/workflows.md
+      - Security: frontend/security.md
+      - Testing: frontend/testing.md
+      - Deployment: frontend/deployment.md
   - Platform:
-      - Overview: platform/index.md
+      - platform/index.md
+      - Configuration: platform/configuration.md
+      - Security: platform/security.md
+      - Testing: platform/testing.md
+      - Deployment: platform/deployment.md
   - Security:
-      - Overview: security/index.md
+      - security/index.md
+      - Privacy and retention: security/privacy-and-retention.md
   - Developer Guide:
-      - Overview: developer-guide/index.md
-      - Setup: developer-guide/setup.md
+      - developer-guide/index.md
+      - Testing overview: developer-guide/testing-overview.md
+      - Engineering standards: developer-guide/engineering-standards.md
+      - Release checklist: developer-guide/release-checklist.md
   - Reference:
-      - Overview: reference/index.md
+      - Glossary: reference/glossary.md
