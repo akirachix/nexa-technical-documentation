@@ -1,15 +1,21 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+PYTHON_BIN="${PYTHON_BIN:-$(command -v python3 || command -v python || true)}"
+if [ -z "$PYTHON_BIN" ]; then
+  echo "Python interpreter not found. Install Python 3 or set PYTHON_BIN."
+  exit 1
+fi
+
 fail=0
 note() { printf '%s\n' "$*"; }
 
 note "1/4  Strict MkDocs build"
-python -m mkdocs build --strict --site-dir "$(mktemp -d)" >/dev/null 2>"${TMPDIR:-/tmp}/zl_build.log" || {
+"$PYTHON_BIN" -m mkdocs build --strict --site-dir "$(mktemp -d)" >/dev/null 2>"${TMPDIR:-/tmp}/zl_build.log" || {
   cat "${TMPDIR:-/tmp}/zl_build.log"; fail=1; }
 
 note "2/4  Images: every file in docs/assets/images is referenced, every reference exists"
-python - <<'PY' || fail=1
+"$PYTHON_BIN" - <<'PY' || fail=1
 import re, sys, pathlib
 root = pathlib.Path("docs"); img = root / "assets" / "images"
 text = "\n".join(p.read_text(encoding="utf-8") for p in root.rglob("*.md"))

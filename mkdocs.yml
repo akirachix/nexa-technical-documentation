@@ -109,6 +109,7 @@ nav:
       - Privacy and retention: security/privacy-and-retention.md
   - Developer Guide:
       - developer-guide/index.md
+      - Local setup: developer-guide/local-setup.md
       - Testing overview: developer-guide/testing-overview.md
       - Engineering standards: developer-guide/engineering-standards.md
       - Release checklist: developer-guide/release-checklist.md
