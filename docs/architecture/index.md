@@ -20,6 +20,54 @@ The second diagram groups the same system into five layers: users and devices, p
 
 ![Secure architecture diagram with users, perimeter security, application layer, data layer and external services](../assets/images/secure-architecture-diagram.png)
 
+## Component communication
+
+The diagram below shows how the frontend, backend, database, routing service and AI service communicate in a request. Traffic from the PWA reaches the backend over HTTPS through the perimeter (DNS/DDoS protection, WAF, API gateway). The backend is the authority for authentication, authorization and data access, and it calls Openrouteservice for routes and Gemini for cost explanations.
+
+```mermaid
+flowchart LR
+    subgraph PWA ["Progressive Web App (Shipper / Fleet Manager)"]
+        P["Browser client"]
+    end
+    subgraph Perimeter ["Perimeter"]
+        G["DNS / DDoS protection, WAF, API gateway"]
+    end
+    subgraph Backend ["Backend API (FastAPI)"]
+        A["Authentication & OTP"]
+        B["Authorization & validation"]
+        M["Matching, allocation, cost estimation"]
+    end
+    subgraph DB["(PostgreSQL, encrypted)"]
+        D[("(companies, users, trucks, shipments, shipment_matches, reservations, audit_logs)")]
+    end
+    subgraph External["External services"]
+        O["Openrouteservice: distance, duration"]
+        Ai["Gemini API: estimate + explanation"]
+        R["Reference files (Markdown)"]
+        V["Vault: secrets"]
+    end
+
+    P -->|HTTPS/TLS| G
+    G --> A
+    A --> B
+    B --> M
+    M <--> D
+    M --> O
+    M --> Ai
+    M --> R
+    M --> V
+```
+
+## Deployment and configuration accuracy
+
+The architecture diagrams reflect the deployed configuration as described in this documentation:
+
+- The PWA is served over HTTPS with DNS and DDoS protection, a WAF (labelled as provided by Vercel in the secure architecture diagram) and an API gateway.
+- The backend runs on Heroku, connects to encrypted PostgreSQL, and retrieves secrets from Vault.
+- Encrypted backups are stored on Supabase with separate recovery access.
+- The two diagrams (system architecture and secure architecture) show the same system: the first groups it by application modules and user roles, the second by five layers (users and devices, perimeter security, application layer, data layer, external services).
+- One difference between the diagrams and the live configuration should be confirmed before a release: the WAF provider name and the Gemini file registry location (a local JSON file on the application server) affect scaling — do not scale the backend to several instances until the Gemini file registry is moved off the local server file. See [Platform deployment](../platform/deployment.md).
+
 ## Architectural decisions
 
 | Decision | Description |

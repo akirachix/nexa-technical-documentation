@@ -10,9 +10,9 @@ This guide helps a developer find where to make a change and how to keep the doc
 
 ## Local setup
 
-Setup instructions for the backend and the frontend are not documented here, because neither repository was available when this documentation was prepared. That includes prerequisites, installation, environment configuration, local services such as PostgreSQL and the secret manager, database setup and migrations, and the commands that run each application. Add them to the [Backend](../backend/deployment.md) and [Frontend](../frontend/index.md#technology) pages once they are confirmed.
+Full backend and frontend setup procedures are in [Local setup](local-setup.md): repository links, required software, installation commands, environment variables, database setup and migrations, and the commands that run each application.
 
-Two procedures are documented and runnable:
+Two procedures are documented and runnable directly in this repository:
 
 - Generating the cost-estimation reference files: see [Running the notebook](../ai/reference-data.md#running-the-notebook).
 - Building and previewing this documentation: see [Building this documentation](#building-this-documentation).
